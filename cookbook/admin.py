@@ -12,5 +12,6 @@ class RecipeInLine(admin.TabularInline):
 
 @admin.register(Recipe)
 class RecipeAdmin(admin.ModelAdmin):
+    """Настройка admin-панели для рецептов"""
     inlines = (RecipeInLine,)
     exclude = ('ingridients',)

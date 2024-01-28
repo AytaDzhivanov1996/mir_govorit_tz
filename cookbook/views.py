@@ -10,6 +10,7 @@ from cookbook.models import Product, Recipe, ProductToRecipe
 
 @api_view(['GET'])
 def add_product_to_recipe(request, product_id, recipe_id, weight):
+    """Добавление продукта к рецепту (замена граммовки)"""
     try:
         weight = int(weight)
     except ValueError:
@@ -33,6 +34,7 @@ def add_product_to_recipe(request, product_id, recipe_id, weight):
 @api_view(['GET'])
 @transaction.atomic
 def cook_recipe(request, recipe_id):
+    """Приготовление по рецепту (изменение счетчика использования продукта)"""
     recipe = get_object_or_404(Recipe, pk=recipe_id)
 
     try:
@@ -48,6 +50,7 @@ def cook_recipe(request, recipe_id):
 
 @api_view(['GET'])
 def show_recipes_without_product(request, product_id):
+    """Таблица рецептов без продукта (использование менее 10 грамм)"""
     product = get_object_or_404(Product, pk=product_id)
 
     recipe_without_product = (
